@@ -26,15 +26,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create comment with API
-        run:
-          | # We will use github cli instead of using curl and to handle the params in a nicer way
+        run: |
           gh api -X POST \
-            url=https:api.github.com/repos/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
+            "https://api.github.com/repos/${{ env.ORGANIZATION }}/${{ env.REPOSITORY }}/issues/${{ env.ISSUE_NUMBER }}/comments" \
             -f body="This is a comment created with the GitHub CLI from API"
-        env: # To be able to work with the github cli we need to set the token otherwise it will fail or not work
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # This is a special token that is created by github and it has the permissions to do some actions on this repo only
-          ORGANIZATION: ${{github.event.organization.login}}
-          REPOSITORY: ${{github.event.repository.name}}
-          ISSUE_NUMBER: ${{github.event.issue.number}}
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORGANIZATION: ${{ github.event.organization.login }}
+          REPOSITORY: ${{ github.event.repository.name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
           reactions: "+1"
