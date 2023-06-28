@@ -28,9 +28,12 @@ jobs:
       - name: Create comment with API
         run:
           | # We will use github cli instead of using curl and to handle the params in a nicer way
-          gh api -X POST \
-            http:api.github.com/repo/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
-            -f body="This is a comment created with the GitHub CLI from API"
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/OWNER/REPO/issues/ISSUE_NUMBER/comments \
+          -f body='Me too'
         env: # To be able to work with the github cli we need to set the token otherwise it will fail or not work
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} # This is a special token that is created by github and it has the permissions to do some actions on this repo only
           ORGANIZATION: ${{github.event.organization.login}}
