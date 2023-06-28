@@ -14,12 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions, v2 is the action that we will use
       - name: hello world
-        run: echo hello world
-        shell: bash
+        run: echo hello world # run shell command
+        shell: bash # what shell we will use to run the command
   goodbye: # another jobs to run
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: goodbye world
         run: echo goodbye world
         shell: bash
