@@ -12,14 +12,14 @@ jobs:
   hello:
     runs-on: ubuntu-latest # the operating system that we want to run our job on
     steps:
-      - uses: actions/checkout@v3 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions, v2 is the action that we will use
+      - uses: actions/checkout@v2 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions, v2 is the action that we will use
       - name: hello world
         run: echo hello world
         shell: bash
   goodbye: # another jobs to run
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: goodbye world
         run: echo goodbye world
         shell: bash
