@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions
       - uses: actions/setup-node@v3 # setup node version
         with:
-          node-version: "16.14.0"
+          node-version: "16.x"
       - name: Install Hasura CLI
         run: npm install -g hasura-cli
 
