@@ -1,0 +1,26 @@
+name: Sync Hasura Staging
+on: # events that trigger on
+  push: # whenever we push to our repo develop branch
+    branches:
+      - develop
+  pull_request: # whenever we pull request on the same branches
+    branches:
+      - develop
+  workflow_dispatch: # gives me a button that I can click on the ui to run this workflow
+
+jobs:
+  sync-hasura-staging:
+    runs-on: ubuntu-latest # the operating system that we want to run our job on
+    steps:
+      - uses: actions/checkout@v2 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions
+      - uses: actions/setup-node@v3 # setup node version
+        with:
+          node-version: "16.14.0"
+      - name: Install Hasura CLI
+        run: npm install -g hasura-cli
+
+      - name: Sync Hasura Staging
+        run: ./bin/sync-hasura-stg.sh
+        env:
+          HASURA_ADMIN_SECRET_STG: ${{ secrets.HASURA_ADMIN_SECRET_STG }}
+          HASURA_MAIN_STG: ${{ secrets.HASURA_MAIN_STG }}
