@@ -25,7 +25,7 @@ jobs:
         run: npm install -g hasura-cli
 
       - name: Sync Hasura Staging
-        run: ./bin/sync-hasura-stg.sh
+        run: sudo chmod +x ./bin/setup-hasura-local.sh && ./bin/setup-hasura-local.sh
         env:
           HASURA_ADMIN_SECRET_STG: ${{ secrets.HASURA_ADMIN_SECRET_STG }}
           HASURA_MAIN_STG: ${{ secrets.HASURA_MAIN_STG }}
