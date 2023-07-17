@@ -8,8 +8,13 @@ on: # events that trigger on
       - develop
   workflow_dispatch: # gives me a button that I can click on the ui to run this workflow
 
+concurrency:
+  group: staging-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   sync-hasura-staging:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
     runs-on: ubuntu-latest # the operating system that we want to run our job on
     steps:
       - uses: actions/checkout@v2 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions
