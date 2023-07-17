@@ -10,10 +10,6 @@ on: # events that trigger on
   #     - develop
   workflow_dispatch: # gives me a button that I can click on the ui to run this workflow
 
-concurrency:
-  group: staging-${{ github.head_ref }}
-  cancel-in-progress: true
-
 jobs:
   sync-hasura-staging:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
