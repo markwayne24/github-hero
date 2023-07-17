@@ -2,12 +2,7 @@ name: Sync Hasura Staging
 on: # events that trigger on
   push: # whenever we push to our repo develop branch
     branches:
-      - main
       - develop
-  # pull_request: # whenever we pull request on the same branches
-  #   branches:
-  #     - main
-  #     - develop
   workflow_dispatch: # gives me a button that I can click on the ui to run this workflow
 
 jobs:
@@ -23,7 +18,7 @@ jobs:
         run: npm install -g hasura-cli
 
       - name: Sync Hasura Staging
-        run: sudo chmod +x ./bin/setup-hasura-local.sh && ./bin/setup-hasura-local.sh
+        run: ./bin/setup-hasura-local.sh
         env:
           HASURA_ADMIN_SECRET_STG: ${{ secrets.HASURA_ADMIN_SECRET_STG }}
           HASURA_MAIN_STG: ${{ secrets.HASURA_MAIN_STG }}
