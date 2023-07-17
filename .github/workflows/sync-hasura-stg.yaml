@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   sync-hasura-staging:
-    # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
     runs-on: ubuntu-latest # the operating system that we want to run our job on
     steps:
       - uses: actions/checkout@v2 # this will use and go to the github.com/actions/checkout and clone it to your repo and use the source code to run the actions
